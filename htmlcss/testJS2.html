@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>test2</title>
+</head>
+<body>
+	東京<input type="radio" name="cities" value="Tokyo">
+	大阪<input type="radio" name="cities" value="Osada">
+	名古屋<input type="radio" name="cities" value="Nagoya">
+	札幌<input type="radio" name="cities" value="Sapporo"><br>
+	<button type="button" onclick="proc()">地域設定</button>
+	<p></p>
+	<script type="text/javascript">
+	function proc(){
+		var input_cities=document.getElementsByName("cities");
+		var i=0;
+		var value_cities="";
+		while(i<input_cities.length)
+		{
+			if(input_cities[i].checked) value_cities=input_cities[i].value;
+			i++;
+		}
+		console.log(value_cities);
+		var tour={
+			Tokyo:"4月11日",
+			Osada:"4月30日",
+			Nagoya:"5月5日",
+			Sapporo:"５月20日"
+		};
+		var scj =document.getElementsByTagName("p");
+		scj[0].innerHTML=tour[value_cities];
+	}
+	</script>
+</body>
+</html>

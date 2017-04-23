@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+	<title>うるう年判定</title>
+</head>
+<body>
+	<h1>うるう</h1>
+	<hr>
+	判定年:<input type="text" name="year" value="0"></input>
+	<button type="button" onclick="uruu()" value="btn">判定</button>
+	<p id="answer"></p>
+	<script type="text/javascript">
+		function uruu(){
+			var year_input=document.getElementsByName("year");
+			var year_value=parseInt(year_input[0].value);
+			var p_answer= document.getElementById("answer");
+			if((( year_value % 4 )== 0) &&( ( year_value % 100 ) != 0) ||( (year_value % 400)  == 0)) p_answer.innerHTML="うるう年です";
+			else p_answer.innerHTML="うるう年ではありません";
+		}
+	</script>
+</body>
+</html>

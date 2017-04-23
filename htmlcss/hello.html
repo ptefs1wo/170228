@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>いくつからいくつまでの加算</title>
+</head>
+<body>
+	<h1>数列</h1>
+	<hr>
+	a:<input type="text" name="n" value="0"></input>
+	b:<input type="text" name="m" value="10"></input>
+	<button type="button" onclick="add()" value="btn">合計を計算</button>
+	<p id="answer"></p>
+	<script type="text/javascript">
+		function add(){
+			var n_input=document.getElementsByName("n");
+			var n_value=parseInt(n_input[0].value);
+			var m_input=document.getElementsByName("m");
+			var m_value=parseInt(m_input[0].value);
+			var total=0;
+			var p_answer= document.getElementById("answer");
+			while(n_value<=m_value)
+			{
+				total+=n_value;
+				n_value++;
+			}
+			console.log(total);
+			p_answer.innerHTML=total;
+		}
+	</script>
+</body>
+</html>

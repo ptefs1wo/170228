@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>testJS</title>
+</head>
+<body>
+	<h1>jsのテスト</h1>
+	<hr>
+	sum:<input type="text" name="sum" value="0"></input><br>
+	add:<input type="text" name="add" value="0"></input><br>
+	<button type ="button" onclick="sum()" value ="btn1">click here</button>
+	<script type="text/javascript">
+	function sum(){
+		var input_sum=document.getElementsByName("sum");
+		var value_sum=parseInt(input_sum[0].value);
+		var input_add=document.getElementsByName("add");
+		var value_add=parseInt(input_add[0].value);
+		value_sum+=value_add;
+		console.log(value_sum);
+		input_sum[0].value=value_sum;
+	}
+	</script>
+</body>
+</html>

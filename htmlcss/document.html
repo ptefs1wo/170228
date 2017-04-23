@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>doc</title>
+</head>
+<body>
+	<h1>document</h1><hr>
+	<form name="form1">
+		<input type="text" name="simei"></input><br>
+		<p id="p_simei"></p>
+		東京<input type="radio" name="place" value="tokyo"></input>
+		大阪<input type="radio" name="place" value="osaka"></input><br>
+		<p id="p_place"></p>
+		<input type "text" name="live"></input>
+		<p id="p_live"></p>
+	</form>
+	<p onclick="calc();">確認</p>
+	<script type="text/javascript">
+		function calc(){
+			var p_input =document.getElementById("p_simei");
+			if(document.form1.simei.value=="")  p_input.innerHTML="氏名を入力してください";
+			else p_input.innerHTML="";
+
+			var p_cities=document.getElementById("p_place");
+			if((document.form1.place[0].checked==false)&&(document.form1.place[1].checked==false))  p_cities.innerHTML="支店を入力してください";
+			else p_cities.innerHTML="";
+			var p_lived =document.getElementById("p_live");
+			if(document.form1.live.value=="")  p_lived.innerHTML="住所を入力してください";
+			else p_lived.innerHTML="";
+		}
+
+	</script>
+</body>
+</html>

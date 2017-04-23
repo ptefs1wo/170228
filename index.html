@@ -1,10 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-	<title>テスト</title>
+	<meta charset="utf-8">
+	<title>jquery</title>
 </head>
 <body>
-<h1>hello</h1>
+	<h1>テスト</h1>
+	<hr>
+	<p>テスト</p>
+	<ul id="main">
+		<li>0</li>
+		<li class="item">1</li>
+		<li class="item">2</li>
+		<li id="abc">3</li>
+		<ul id="sub">
+			<li>りんご</li>
+			<li>ゴリラ</li>
+			<li>らっこ</li>
+			<li class="item">コアラ</li>
+			<li class="item">らっぱ</li>
+		</ul>
+	</ul>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script>
+		$(function(){$("#sub>li:contains('ら')").css("color","red")});
+	</script>
 </body>
 </html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+		<title>秘宝の里玉集め記録</title>
+		<style>
+			body {
+				-webkit-text-size-adjust: 100%;
+			}
+			#rdm{
+				display: none;
+				border:groove;
+				background-color: rgba(100,100,100,0.1);
+			}
+			p{
+				display: inline;
+				border:groove;
+				border-color: rgba(0,20,200,0.8);
+				background-color: rgba(0,20,200,0.1);
+			}
+			p:hover{
+				background-color: rgba(0,20,200,0.5);
+			}
+			#addgyoku button,#sumgyoku button{
+				padding: 1.5em;
+				background-color: rgba(0,20,200,0.1);
+			}
+		</style>
+	</head>
+	<body>
+		<h1>秘宝の里玉集め記録</h1>
+		<p id="btn_rdm">ReadMe(クリックすると開きます)</p>
+		<div id="rdm">
+			刀剣乱舞-ONLINE-のイベント「秘宝の里」の難易度・戦闘結果・手に入れた玉数・楽器・合計玉数をjavascriptで下のテキストボックスに記録できるツールです。<br>
+			記録するテキストは、刀剣乱舞ONLINE（とうらぶ） Wiki*の「玉入手数・楽器ドロップ報告」基準に倣っています。<br>
+			数字ボタンをクリックするとそれぞれの数字ずつ玉数が上下し、玉数、合計玉数の数字入力部分でマウスホイールすると、1ずつ値が上下します。<br>マウスホイールの挙動を確認しているのはIE、Chrome、firefox、Microsoft Edge、Operaの開発当時各最新版です。<br>各種入力後、下の「記録する」ボタンを押すとテキストボックスに記録し、合計玉数も追加します。<br>cookieを有効にしていれば、合計玉数とテキストボックスの中身を保存し、次回アクセス時表示させます。<br>
+			テキストボックスに手動で入力する際、&lt;br&gt;を使うと仕様上ページ更新時&lt;br&gt;が消え、そこで改行されてしまいます。<br>※このツールは個人が作成したものです。自己責任でお使いください。個人での運営のため予告なくページの削除が行われる可能性があります。<br>Made by とある豊前民
+			<button id="dck">このページのcookieを初期化する</button><br>
+		</div>
+		<h2>難易度</h2>
+		<div id="difliculty">
+			<label><input value="vdifficalt">超難&nbsp;</label>
+			<label><input value="hard">難&nbsp;</label>
+			<label><input value="normal">普&nbsp;</label>
+			<label><input value="easy">易</label><br>
+		</div>
+		<label><input type="checkbox" name="special">特別通行手形使用</label><br>
+		<h2>戦闘結果</h2>
+		<div id="result">
+			<label><input value="goal">完走&nbsp;</label>
+			<label><input value="turn">撤退&nbsp;</label>
+			<label><input value="lose">敗北</label><br>
+		</div>
+		<h2>玉数</h2>
+		<div id="addgyoku">
+			<button value="100">+100</button>
+			<button value="10">+10</button>
+			<button value="1">+1</button><br>
+			<input type="number" id="addg" value="0"><br>
+			<button value="-100">-100</button>
+			<button value="-10">-10</button>
+			<button value="-1">-1</button>
+		</div>
+		<h2>楽器</h2>
+		<div id="music">
+			<label><input value="zero">なし&nbsp;</label>
+			<label><input value="flute">笛&nbsp;</label>
+			<label><input value="jpiano">琴&nbsp;</label>
+			<label><input value="jgtr">三味線&nbsp;</label>
+			<label><input value="drum">太鼓&nbsp;</label>
+			<label><input value="bell">鈴</label><br><br>
+		</div>
+		<p id="btn">記録する</p><hr>
+		<span id="warning"></span><br>
+		<textarea name="dropbox" id="dropbox" cols="25" rows="10">ここに記録が書き込まれます</textarea><br>
+		<h2>合計玉数</h2>
+		<div id="sumgyoku">
+			<button value="100">+100</button>
+			<button value="10">+10</button>
+			<button value="1">+1</button><br>
+			<input type="number" id="sumg" value="0"><br>
+			<button value="-100">-100</button>
+			<button value=-10>-10</button>
+			<button value="-1">-1</button>
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script type="text/javascript" src="script.js"></script>
+		<script>
+			let lastTouch = 0;
+			document.addEventListener('touchend', event => {
+				const now = window.performance.now();
+				if (now - lastTouch <= 500) {
+					event.preventDefault();
+				}
+				lastTouch = now;
+			}, true);
+		</script>
+	</body>
+	</html>

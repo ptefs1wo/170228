@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+	<title>正規表現練習</title>
+</head>
+<body>
+<div id="tname"></div>
+<div id="date"></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+var s='<title>どっとインストール</title>';
+	var rs=s.match(/<title>([^<]+)<\/title>/);
+	$("#tname").text(rs[1]);
+	var date=Date.now()+9*1000*60*60*60;
+	date=Date(date);
+	date=date.split(/\s/g);
+	switch(date[1])
+	{
+		case 'May':date[1]=5;break;
+		default:break;
+	}
+	$("#date").text(date[3]+'年'+date[1]+'月'+date[2]+'日'+date[0]+date[4]);
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+	<title>キャラ診断</title>
+	<style>
+		body{
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+<h1>キャラ診断</h1>
+<p><input type="text" id="name" value=""></p>
+<p><input type="button" id="getResult" value="診断！"></p>
+<h2>診断結果</h2>
+<p id="result">こちらに結果が表示されます</p>
+<div id="tweet"></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+	$("#getResult").click(function(){
+		var name=$("#name").val();
+		if(name===""){
+			alert("名前を入力してください！");
+			return;
+		}
+		var characters=["賢い","勇ましい","かわいい","情けない","情けない"];
+		var types=["勇者","魔法使い","戦士","遊び人","スーパースター"];
+		var type=types[Math.floor(Math.random()*types.length)];
+		var character=characters[Math.floor(Math.random()*characters.length)];
+		var result=name+"さんは「"+character+type+"」"+"タイプです！";
+		$("#result").text(result);
+		var tweetLink="<a href='https://twitter.com/intent/tweet?text="+encodeURIComponent(result)+"&hashtags=dotinstall' target='_blank'>ツイートする</a>";
+		$("#tweet").html(tweetLink);
+	});
+</script>
+</body>
+</html>

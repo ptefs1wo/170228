@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+	<title>stopwatch</title>
+	<style>
+	body{
+		background: #e0e0e0;
+		text-align: center;
+	}
+	#timetext{
+		color: #00aaff;
+		font-size: 128px;
+		margin:40px auto;
+		text-shadow: 0 1px rgba(255,255,255,0.5);
+	}
+	.btn{
+		display: inline-block;
+		width: 100px;
+		padding:7px;
+		border-radius: 5px;
+		box-shadow: 0 4px 0 #0088cc;
+		color:#fff;
+		background: #00aaff;
+		cursor: pointer;
+	}
+	.btn+.btn{
+		margin-left: 10px;
+	}
+	.btn.active{
+		opacity: 1.0;
+	}
+	.btn.inactive{
+		opacity: 0.5;
+	}
+	</style>
+</head>
+<body>
+<div id="timetext">0.00</div>
+<div id="start">START</div>
+<div id="stop">STOP</div>
+<div id="reset">RESET</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script>
+	setButtonState(true,false,false);
+	var timerid;
+	var startTime;
+	var elapesedTime=0;
+	var isrunning=false;
+	$('#start').click(function(){
+		if(isrunning) return;
+		isrunning=true;
+		startTime=Date.now();
+		updateTimerText();
+		setButtonState(false,true,false);
+	});
+	function updateTimerText(){
+		timerid=setTimeout(function(){
+			var t=Date.now()-startTime+elapesedTime;
+			$('#timetext').text((t/1000).toFixed(2));
+			updateTimerText();
+		},10);
+	}
+	$('#stop').click(function(){
+		if(!isrunning)return;
+		isrunning=false;
+		elapesedTime+=Date.now()-startTime;
+		clearTimeout(timerid);
+		setButtonState(true,false,true);
+	});
+	$('#reset').click(function(){
+		if(isrunning)return;
+		$('#timetext').text('0.00');
+		elapesedTime=0;
+		setButtonState(true,false,false);
+	});
+	function setButtonState(start,stop,reset) {
+		$('#start,#stop,#reset').removeClass();
+		$('#start').addClass(start ? 'btn active':'btn inactive');
+		$('#stop').addClass(stop ? 'btn active':'btn inactive');
+		$('#reset').addClass(reset ? 'btn active':'btn inactive');
+	}
+	</script>
+</body>
+</html>

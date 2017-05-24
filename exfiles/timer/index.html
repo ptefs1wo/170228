@@ -41,6 +41,7 @@
 <input type="text" value="4" id="uten">
 <hr>
 <div id="timer">00:00</div>
+<div id="alerm"></div>
 <div id="start">START</div><div id="stop">STOP</div><div id="reset">RESET</div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -72,23 +73,29 @@
 	$('#reset').click(function(){
 		if(keeper) return;
 		$('#timer').text('00:00');
+		$('#alerm').text('');
 		elapesedTime=0;
 		setButtonState(true,false,false);
 	})
 	function updateTimerText(){timeid=setTimeout(function(){
 		var time=((stopTime-Date.now())/1000).toFixed(0);
-		//var timertext=[Math.floor(time/60),time-(Math.floor(time/60))*60]
 		var timertext=[Math.floor(Math.floor(time/60)/10),Math.floor(time/60)%10,Math.floor((time-(Math.floor(time/60))*60)/10),Math.floor(time-(Math.floor(time/60))*60)%10]
 		$('#timer').text(timertext[0]+""+timertext[1]+":"+timertext[2]+""+timertext[3]);
-		//$('#timer').text(timertext[0]+timertext[1]+":"+timertext[2]+timertext[3]);
 		updateTimerText();},1000);
-	if(stopTime<=Date.now())
-	{
-		$('#timer').text('00:00');
-		alert('just now!');
-		clearTimeout(timeid);
-		setButtonState(true,false,false);
-		keeper=false;
+	var interval=startTime;
+		if(Date.now()-interval>=60000)
+		{
+			$('#alerm').text(Math.floor((Date.now()-startTime)/1000/60)+'分経過');
+			interval=Date.now();
+		}
+		if(stopTime<=Date.now())
+		{
+			$('#timer').text('00:00');
+			$('#alerm').text('');
+			alert('just now!');
+			clearTimeout(timeid);
+			setButtonState(true,false,false);
+			keeper=false;
 		}
 	}
 	function setButtonState(start,stop,reset) {

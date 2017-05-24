@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+	<title>timer</title>
+	<style>
+	.contain
+	{
+		text-align: center;
+	}
+	input
+	{
+		width: 3em;
+	}
+	.btn{
+		display: inline-block;
+		width: 100px;
+		padding:7px;
+		border-radius: 5px;
+		box-shadow: 0 4px 0 #0088cc;
+		color:#fff;
+		background: #00aaff;
+		cursor: pointer;
+	}
+	.btn+.btn{
+		margin-left: 10px;
+	}
+	.btn.active{
+		opacity: 1.0;
+	}
+	.btn.inactive{
+		opacity: 0.5;
+	}
+	</style>
+</head>
+<body>
+<div class="contain">
+<input type="text" value="1" id="ten">
+<input type="text" value="2" id="one"><b>：</b>
+<input type="text" value="3" id="uone">
+<input type="text" value="4" id="uten">
+<hr>
+<div id="timer">00:00</div>
+<div id="start">START</div><div id="stop">STOP</div><div id="reset">RESET</div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+	setButtonState(true,false,false);
+	var timeid;
+	var timervalue;
+	var startTime;
+	var stopTime;
+	var elapesedTime=0;
+	var keeper=false;
+	$('#start').click(function(){
+		if(keeper===true|parseInt($('#ten').val())+parseInt($('#one').val())+parseInt($('#uone').val())+parseInt($('#uten').val())<=0) return;
+		keeper=true;
+		if(elapesedTime==0)timervalue=parseInt($('#ten').val())*1000*60*10+parseInt($('#one').val())*1000*60+parseInt($('#uone').val())*1000*10+parseInt($('#uten').val())*1000;
+		else timervalue=elapesedTime;
+		startTime=Date.now();
+		stopTime=startTime+timervalue;
+		updateTimerText();
+		setButtonState(false,true,false);
+	});
+	$('#stop').click(function(){
+		if(!keeper) return;
+		keeper=false;
+		elapesedTime=stopTime-Date.now();
+		clearTimeout(timeid);
+		setButtonState(true,false,true);
+	});
+	$('#reset').click(function(){
+		if(keeper) return;
+		$('#timer').text('00:00');
+		elapesedTime=0;
+		setButtonState(true,false,false);
+	})
+	function updateTimerText(){timeid=setTimeout(function(){
+		var time=((stopTime-Date.now())/1000).toFixed(0);
+		//var timertext=[Math.floor(time/60),time-(Math.floor(time/60))*60]
+		var timertext=[Math.floor(Math.floor(time/60)/10),Math.floor(time/60)%10,Math.floor((time-(Math.floor(time/60))*60)/10),Math.floor(time-(Math.floor(time/60))*60)%10]
+		$('#timer').text(timertext[0]+""+timertext[1]+":"+timertext[2]+""+timertext[3]);
+		//$('#timer').text(timertext[0]+timertext[1]+":"+timertext[2]+timertext[3]);
+		updateTimerText();},1000);
+	if(stopTime<=Date.now())
+	{
+		$('#timer').text('00:00');
+		alert('just now!');
+		clearTimeout(timeid);
+		setButtonState(true,false,false);
+		keeper=false;
+		}
+	}
+	function setButtonState(start,stop,reset) {
+		$('#start,#stop,#reset').removeClass();
+		$('#start').addClass(start ? 'btn active':'btn inactive');
+		$('#stop').addClass(stop ? 'btn active':'btn inactive');
+		$('#reset').addClass(reset ? 'btn active':'btn inactive');
+	}
+</script>
+</body>
+</html>

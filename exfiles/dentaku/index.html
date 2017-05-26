@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+	<title>割り勘電卓</title>
+	<style>
+		body{
+			font-size: 16px;
+			text-align: center;
+			font-family: Arial,sans-serif;
+		}
+		h1{
+			font-size: 24px;
+		}
+		input[type="text"]{
+			padding: 7px;
+			border:1px solid #ddd;
+			border-radius: 3px;
+			width:100px;
+			font-weight: bold;
+			font-size: 18px;
+			text-align: right;
+		}
+		#btn{
+			margin:30px auto;
+			width:180px;
+			border-radius: 5px;
+			box-shadow: 0 4px #e91b0c;
+			background: #f44336;
+			color:#fff;
+			cursor: pointer;
+			padding: 7px;
+		}
+		#btn:hover{
+			opacity: 0.8;
+		}
+	</style>
+</head>
+<body>
+<h1>割り勘電卓</h1>
+<p>金額<input type="text" id="price" value="0"></p>
+<p>人数<input type="text" id="num" value="0"></p>
+<div id="btn">計算する</div>
+<p id="result"></p>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+	$('#btn').click(function(){
+		var price=$('#price').val();
+		var num=$('#num').val();
+		var x1,x2,y1,y2;
+		var unit=100;
+		if(price.match(/^[1-9][0-9]*$/)&&num.match(/^[1-9][0-9]*$/)) {
+			if(price%num===0){
+				$('#result').text('一人'+(price/num)+'円ちょうどです！');
+			}
+			else{
+				x1=Math.floor(price/num/unit)*unit;
+				y1=price-(x1*num);
+				x2=Math.ceil(price/num/unit)*unit;
+				y2=Math.abs(price-(x2*num));
+				$('#result').html('一人'+x1+'円だと'+y1+'円足りません。<br>'+'一人'+x2+'円だと'+y2+'円余ります。');
+			}
+		}
+		else{$('#result').text('入力された値に誤りがあります');}
+	});
+</script>
+</body>
+</html>

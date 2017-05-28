@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Hello</title>
+</head>
+<body>
+<h1>Hello</h1>
+<hr>
+
+	<span>繰り返し数</span><input type="text" id="num"><br>
+	<input type="text" id="numx"><span>に一回</span>
+	<input type="text" id="name2"><span>がでるようにする</span><br>
+	<span>テキスト</span><input type="text" id="name1">
+	<input id="start" type="submit">
+	<p id="result"></p>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+let name;//変わる変数let
+let result="";
+let i=0;
+$('#start').click(function(){
+	const num=$('#num').val();//変わらない変数const
+	const numx=$('#numx').val();
+	while(i<num){
+		if((i+1)%numx==0) name=$('#name2').val();
+		else name=$('#name1').val();
+		if((i+1)%10==0) result+=name+':'+(i+1)+'<br>';
+		else result+=name+'<br>';
+		i++;
+	}
+	$('#result').html(result);
+});
+</script>
+</body>
+</html>

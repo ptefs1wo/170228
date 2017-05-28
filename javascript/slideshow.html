@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+	<title>Slide Show</title>
+</head>
+<body>
+<h1>Slide Show</h1>
+<img src="Desert.jpg" width="640"><br>
+<button id="start">開始</button>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    /*$('img').click(function(){
+    		$('img').attr('src',picture[i]);
+    		if(i<picture.length-1) i++;
+    		else i=0;
+    });*/
+    /*$('#prev').click(function(){
+    	if(i<=0) i=picture.length-1;
+     	else i--;
+      $('img').attr('src',picture[i]);
+    });
+    $('#next').click(function(){
+    	if(i<picture.length-1) i++;
+        else i=0;
+        $('img').attr('src',picture[i]);
+    });*/
+    var timeid;
+    var picture=['Jellyfish.jpg','Koala.jpg','Desert.jpg'];
+    var i=0;
+    $('#start').click(function(){
+    	timer();
+    });
+    function timer(){
+    timeid=setTimeout(function(){
+         	$('img').attr('src',picture[i]);
+         	if(i<picture.length-1) i++;
+         	else i=0;
+    	timer();
+     	},2000);
+    }
+</script>
+</body>
+</html>

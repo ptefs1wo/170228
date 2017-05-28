@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Array</title>
+</head>
+<body>
+<h1>Array</h1>
+<hr>
+<script>
+const testArray=[18,33,7];
+let i=0;
+while(i<testArray.length){
+	console.log(testArray[i]);
+	i++;
+}
+testArray.push(44);
+i=0;
+while(i<testArray.length){
+	console.log(testArray[i]);
+	i++;
+}
+const testArrayCopy=[...testArray];//宣言と同時にしか使えない
+i=0;
+while(i<testArrayCopy.length){
+	console.log(testArrayCopy[i]);
+	i++;
+}
+</script>
+</body>
+</html>
